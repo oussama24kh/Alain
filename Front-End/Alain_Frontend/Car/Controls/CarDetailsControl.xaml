@@ -1,0 +1,101 @@
+﻿<UserControl x:Class="project_03.Car.Controls.CarDetailsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             Background="Transparent" MinWidth="540">
+
+    <Border Style="{StaticResource CardStyle}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="1"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Card Header (Plate & Status Pill) -->
+            <Grid Grid.Row="0" Margin="0,0,0,16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock x:Name="TxtBrandModel" Text="N/A" Style="{StaticResource HeaderTextStyle}" FontSize="18"/>
+                    <TextBlock x:Name="TxtPlate" Text="N/A" Style="{StaticResource SubHeaderTextStyle}" Margin="0,2,0,0"/>
+                </StackPanel>
+
+                <!-- Status Pill (uses your FleetStatusPillStyle) -->
+                <Border Grid.Column="1" Style="{StaticResource FleetStatusPillStyle}" x:Name="StatusPillBorder">
+                    <TextBlock x:Name="TxtStatus" Text="N/A" Foreground="White" FontSize="11" FontWeight="SemiBold"/>
+                </Border>
+            </Grid>
+
+            <!-- Divider Line -->
+            <Separator Grid.Row="1" Background="{StaticResource BorderBrushSoft}" Margin="0,0,0,16"/>
+
+            <!-- Details Grid (2 Columns) -->
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Left Column Specs -->
+                <StackPanel Grid.Column="0">
+                    <!-- Year -->
+                    <DockPanel Margin="0,0,0,12">
+                        <iconPacks:PackIconMaterial Kind="Calendar" Width="14" Height="14" Foreground="{StaticResource TextSecondaryBrush}" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        <TextBlock Text="Année:" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12" Width="110"/>
+                        <TextBlock x:Name="TxtYear" Text="N/A" Foreground="{StaticResource TextPrimaryBrush}" FontSize="12" FontWeight="Medium"/>
+                    </DockPanel>
+
+                    <!-- Fuel Type -->
+                    <DockPanel Margin="0,0,0,12">
+                        <iconPacks:PackIconMaterial Kind="Fuel" Width="14" Height="14" Foreground="{StaticResource TextSecondaryBrush}" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        <TextBlock Text="Type de carburant:" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12" Width="110"/>
+                        <TextBlock x:Name="TxtFuelType" Text="N/A" Foreground="{StaticResource TextPrimaryBrush}" FontSize="12" FontWeight="Medium"/>
+                    </DockPanel>
+
+                    <!-- Transmission -->
+                    <DockPanel Margin="0,0,0,12">
+                        <iconPacks:PackIconMaterial Kind="CarShiftPattern" Width="14" Height="14" Foreground="{StaticResource TextSecondaryBrush}" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        <TextBlock Text="Boite de vitesse:" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12" Width="110"/>
+                        <TextBlock x:Name="TxtTransmission" Text="N/A" Foreground="{StaticResource TextPrimaryBrush}" FontSize="12" FontWeight="Medium"/>
+                    </DockPanel>
+
+                    <!-- Body Type -->
+                    <DockPanel Margin="0,0,0,12">
+                        <iconPacks:PackIconMaterial Kind="Car" Width="14" Height="14" Foreground="{StaticResource TextSecondaryBrush}" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        <TextBlock Text="Type de carrosserie:" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12" Width="110"/>
+                        <TextBlock x:Name="TxtBodyType" Text="N/A" Foreground="{StaticResource TextPrimaryBrush}" FontSize="12" FontWeight="Medium"/>
+                    </DockPanel>
+                </StackPanel>
+
+                <!-- Right Column Specs -->
+                <StackPanel Grid.Column="2">
+                    <!-- Seats & Doors -->
+                    <DockPanel Margin="0,0,0,12">
+                        <iconPacks:PackIconMaterial Kind="AccountMultiple" Width="14" Height="14" Foreground="{StaticResource TextSecondaryBrush}" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        <TextBlock Text="Places / Portes:" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12" Width="110"/>
+                        <TextBlock x:Name="TxtSeatsDoors" Text="N/A" Foreground="{StaticResource TextPrimaryBrush}" FontSize="12" FontWeight="Medium"/>
+                    </DockPanel>
+
+                    <!-- Mileage -->
+                    <DockPanel Margin="0,0,0,12">
+                        <iconPacks:PackIconMaterial Kind="Speedometer" Width="14" Height="14" Foreground="{StaticResource TextSecondaryBrush}" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        <TextBlock Text="Kilométrage:" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12" Width="110"/>
+                        <TextBlock x:Name="TxtMileage" Text="N/A" Foreground="{StaticResource TextPrimaryBrush}" FontSize="12" FontWeight="Medium"/>
+                    </DockPanel>
+
+                    <!-- Daily Price -->
+                    <DockPanel Margin="0,0,0,12">
+                        <iconPacks:PackIconMaterial Kind="CurrencyUsd" Width="14" Height="14" Foreground="{StaticResource GreenBrush}" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        <TextBlock Text="Tarif journalier:" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12" Width="110"/>
+                        <TextBlock x:Name="TxtPrice" Text="N/A" Foreground="{StaticResource GreenBrush}" FontSize="13" FontWeight="Bold"/>
+                    </DockPanel>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>

@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="../ALAIN-Business/ALAIN-Business.csproj" Id="5f60525e-1522-4740-b888-5a0b3bb0c1a0" />
+  <Project Path="../ALAIN-DataAccess/ALAIN-DataAccess.csproj" Id="17d55744-687c-4830-a71a-8a5fd3e58af7" />
+  <Project Path="ALAIN-API.csproj" />
+</Solution>

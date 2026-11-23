@@ -1,0 +1,112 @@
+﻿<Window x:Class="project_03.Customer.AddEditCustomerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        Title="Information Client" Height="500" Width="840"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize" Loaded="Window_Loaded"
+        Background="{StaticResource DarkBgBrush}">
+
+    <Border Style="{StaticResource CardStyle}" Margin="20" Padding="24">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <StackPanel Grid.Row="0" Margin="0,0,0,20">
+                <TextBlock x:Name="WindowTitleText" Text="Ajouter un Client" Style="{StaticResource HeaderTextStyle}"/>
+                <TextBlock Text="Saisissez les informations personnelles et de contact du client ci-dessous." Style="{StaticResource SubHeaderTextStyle}" Margin="0,4,0,0"/>
+            </StackPanel>
+
+            <!-- Form Content (2-Column Horizontal Layout) -->
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="0,0,6,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="24"/>
+                        <!-- Spacer -->
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- LEFT COLUMN -->
+                    <StackPanel Grid.Column="0">
+                        <!-- National Number (CIN) -->
+                        <StackPanel Margin="0,0,0,14">
+                            <TextBlock Text="N° National (CIN)" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12" Margin="0,0,0,6"/>
+                            <TextBox x:Name="TxtNationalNumber" Style="{StaticResource AppTextBoxStyle}" Tag="ex: AB123456"/>
+                        </StackPanel>
+
+                        <!-- First Name -->
+                        <StackPanel Margin="0,0,0,14">
+                            <TextBlock Text="Prénom" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12" Margin="0,0,0,6"/>
+                            <TextBox x:Name="TxtFirstName" Style="{StaticResource AppTextBoxStyle}" Tag="ex: Youssef"/>
+                        </StackPanel>
+
+                        <!-- Last Name -->
+                        <StackPanel Margin="0,0,0,14">
+                            <TextBlock Text="Nom" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12" Margin="0,0,0,6"/>
+                            <TextBox x:Name="TxtLastName" Style="{StaticResource AppTextBoxStyle}" Tag="ex: Benali"/>
+                        </StackPanel>
+
+                        <!-- Phone -->
+                        <StackPanel Margin="0,0,0,14">
+                            <TextBlock Text="Téléphone" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12" Margin="0,0,0,6"/>
+                            <TextBox x:Name="TxtPhone" Style="{StaticResource AppTextBoxStyle}" Tag="ex: +212 612-345678"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- RIGHT COLUMN -->
+                    <StackPanel Grid.Column="2">
+                        <!-- Email -->
+                        <StackPanel Margin="0,0,0,14">
+                            <TextBlock Text="Adresse Email" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12" Margin="0,0,0,6"/>
+                            <TextBox x:Name="TxtEmail" Style="{StaticResource AppTextBoxStyle}" Tag="ex: client@example.com"/>
+                        </StackPanel>
+
+                        <!-- Address -->
+                        <StackPanel Margin="0,0,0,14">
+                            <TextBlock Text="Adresse Résidentielle" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12" Margin="0,0,0,6"/>
+                            <TextBox x:Name="TxtAddress" Style="{StaticResource AppTextBoxStyle}" Tag="ex: N° 45, Bd Zerktouni, Casablanca"/>
+                        </StackPanel>
+                        
+                        <!-- Date of Birth -->
+                        <StackPanel Margin="0,0,0,14">
+                            <TextBlock Text="Date de Naissance" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12" Margin="0,0,0,6"/>
+                            <DatePicker x:Name="DpDateOfBirth" Style="{StaticResource AppDatePickerStyle}" Focusable="False"/>
+                        </StackPanel>
+
+                        <!-- Nationality (ComboBox) -->
+                        <StackPanel Margin="0,0,0,14">
+                            <TextBlock Text="Nationalité" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12" Margin="0,0,0,6"/>
+                            <ComboBox x:Name="CmbNationality" Style="{StaticResource FilterComboStyle}" Width="NaN">
+                            </ComboBox>
+                        </StackPanel>
+                        
+                    </StackPanel>
+                </Grid>
+            </ScrollViewer>
+
+            <!-- Action Buttons -->
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+                <Button x:Name="BtnCancel" Click="BtnCancel_Click" Width="105" Height="36" Margin="0,0,12,0"
+                        Background="{StaticResource BorderBrushSoft}" Foreground="{StaticResource TextPrimaryBrush}" Style="{StaticResource PrimaryButtonStyle}">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <iconPacks:PackIconMaterial Kind="Close" Width="14" Height="14" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                        <TextBlock Text="Annuler" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="BtnSave" Click="BtnSave_Click" Width="130" Height="36" Style="{StaticResource PrimaryButtonStyle}">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <iconPacks:PackIconMaterial x:Name="IconSave" Kind="AccountPlus" Width="14" Height="14" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                        <TextBlock x:Name="TxtSaveButton" Text="Enregistrer" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+
+        </Grid>
+    </Border>
+</Window>

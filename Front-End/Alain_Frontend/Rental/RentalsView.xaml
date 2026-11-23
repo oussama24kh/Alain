@@ -1,0 +1,262 @@
+﻿<UserControl x:Class="project_03.Rental.RentalsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             Background="{StaticResource DarkBgBrush}" Loaded="UserControl_Loaded">
+
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="12"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- 1. Header & Actions Toolbar -->
+        <Grid Grid.Row="0" Margin="0,0,0,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="Rental Management" Style="{StaticResource HeaderTextStyle}"/>
+                <TextBlock Text="Track active vehicle reservations, contract schedules, and rental statuses." Style="{StaticResource SubHeaderTextStyle}" Margin="0,4,0,0"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+
+                <!-- Add Rental Button -->
+                <Button x:Name="BtnAddRental" Height="36" Style="{StaticResource PrimaryButtonStyle}" Click="BtnAddRental_Click">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <iconPacks:PackIconMaterial Kind="PlusCircle" Width="14" Height="14" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                        <TextBlock Text="Nouvelle Location" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <!-- 2. Metric Summary Cards -->
+        <UniformGrid Grid.Row="1" Columns="3" Margin="0,0,0,20">
+            <!-- Active Rentals Card -->
+            <Border Style="{StaticResource CardStyle}" Margin="0,0,12,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Active Rentals" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12"/>
+                        <TextBlock Style="{StaticResource HeaderTextStyle}" FontSize="24" Margin="0,6,0,0" x:Name="txtActiveRentals"
+                             Text="{Binding ActiveRentals, StringFormat={}{0:N2}, TargetNullValue=N/A, FallbackValue=N/A}"/>
+                    </StackPanel>
+                    <Border Grid.Column="1" Width="40" Height="40" CornerRadius="8" Background="{StaticResource GreenBrush}" VerticalAlignment="Center">
+                        <iconPacks:PackIconMaterial Kind="Key" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                    </Border>
+                </Grid>
+            </Border>
+
+            <!-- Overdue Card -->
+            <Border Style="{StaticResource CardStyle}" Margin="6,0,6,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Overdue Rentals" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12"/>
+                        <TextBlock Style="{StaticResource HeaderTextStyle}" FontSize="24" Margin="0,6,0,0" x:Name="txtOverdueRentals"
+                                   Text="{Binding OverdueRentals, StringFormat={}{0:N2}, TargetNullValue=N/A, FallbackValue=N/A}"/>
+                    </StackPanel>
+                    <Border Grid.Column="1" Width="40" Height="40" CornerRadius="8" Background="{StaticResource AmberBrush}" VerticalAlignment="Center">
+                        <iconPacks:PackIconMaterial Kind="AlarmOff" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                    </Border>
+                </Grid>
+            </Border>
+
+            <!-- Total Completed Card -->
+            <Border Style="{StaticResource CardStyle}" Margin="12,0,0,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Completed This Month" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12"/>
+                        <TextBlock Style="{StaticResource HeaderTextStyle}" FontSize="24" Margin="0,6,0,0" x:Name="txtCompletedThisMonth"
+                               Text="{Binding CompletedRentals, StringFormat={}{0:N2}, TargetNullValue=N/A, FallbackValue=N/A}"/>
+                    </StackPanel>
+                    <Border Grid.Column="1" Width="40" Height="40" CornerRadius="8" Background="#2563EB" VerticalAlignment="Center">
+                        <iconPacks:PackIconMaterial Kind="CheckCircle" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                    </Border>
+                </Grid>
+            </Border>
+        </UniformGrid>
+
+        <Border Grid.Row="2" Style="{StaticResource CardStyle}"
+        Padding="16,12" Margin="0,0,0,12" x:Name="FilterGird">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Field selector -->
+                <TextBlock Grid.Column="0" Text="FILTRER PAR"
+                   Style="{StaticResource FilterLabelStyle}"/>
+
+                <!-- Value input -->
+                <TextBox Grid.Column="2" Width="150" Style="{StaticResource AppTextBoxStyle}"
+                         x:Name="txtbx_Filter" Visibility="Collapsed" TextChanged="txtbx_Filter_TextChanged"/>
+
+                <ComboBox Grid.Column="2" Style="{StaticResource FilterComboStyle}" Height="43"
+                    Width="150" Margin="0,0,16,0" Visibility="Collapsed" x:Name="CBx_Status">
+                </ComboBox>
+
+                <ComboBox Grid.Column="1" Style="{StaticResource FilterComboStyle}"
+                  Width="150" Margin="0,0,16,0" x:Name="CBx_FilterBy">
+                    <ComboBoxItem Content="Aucun filtre"/>
+                    <ComboBoxItem Content="Référence"/>
+                    <ComboBoxItem Content="Immatriculation"/>
+                    <ComboBoxItem Content="Numéro National"/>
+                    <ComboBoxItem Content="Statut"/>
+                </ComboBox>
+
+                <!-- Clear -->
+                <Button Style="{StaticResource PrimaryButtonStyle}" Grid.Column="4" Width="100" Height="30" 
+                        x:Name="btn_Clear" Visibility="Hidden" Click="btn_Clear_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <iconPacks:PackIconMaterial Kind="Close" Width="14" Height="14" VerticalAlignment="Center" Margin="0,0,5,0" />
+                        <TextBlock Text="Effacer" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                    </StackPanel>
+                </Button>
+            </Grid>
+        </Border>
+
+        <!-- 3. Rentals DataGrid -->
+        <DataGrid x:Name="RentalsDataGrid"
+                  Grid.Row="4" Style="{StaticResource AppDataGridStyle}"
+                  ColumnHeaderStyle="{StaticResource AppDataGridColumnHeaderStyle}"
+                  RowStyle="{StaticResource AppDataGridRowStyle}"  
+                  CellStyle="{StaticResource AppDataGridCellStyle}">
+
+            <DataGrid.Columns>
+
+                <!-- RENTAL ID / REF -->
+                <DataGridTextColumn Header="RÉFÉRENCE"
+                    Binding="{Binding RentalCode}"
+                    Width="1.0*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Foreground" Value="{StaticResource TextSecondaryBrush}"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="FontFamily" Value="Consolas"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <!-- VEHICLE -->
+                <DataGridTemplateColumn Header="VÉHICULE" Width="1.8*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Text="{Binding CarFullName}"
+                                           Foreground="{StaticResource TextPrimaryBrush}"
+                                           FontWeight="SemiBold"/>
+                                <TextBlock Text="{Binding CarPlate}"
+                                           Style="{StaticResource SubHeaderTextStyle}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!-- CLIENT (Full Name + CIN) -->
+                <DataGridTemplateColumn Header="CLIENT" Width="1.8*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Text="{Binding CustomerName}"
+                           Foreground="{StaticResource TextPrimaryBrush}"
+                           FontWeight="SemiBold"/>
+                                <TextBlock Text="{Binding NationalNo}"
+                           Style="{StaticResource SubHeaderTextStyle}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!-- RENTAL PERIOD / DATES -->
+                <DataGridTemplateColumn Header="PÉRIODE" Width="1.5*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Text="{Binding RentalPeriodText}"
+                                           Foreground="{StaticResource TextPrimaryBrush}"
+                                           FontSize="12"/>
+                                <TextBlock Text="{Binding DaysCount, StringFormat='({0} jours)'}"
+                                           Style="{StaticResource SubHeaderTextStyle}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!-- STATUS -->
+                <DataGridTemplateColumn Header="STATUT" Width="1.0*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border Style="{StaticResource AppStatusPillStyle}">
+                                <TextBlock Text="{Binding Status}"
+                                           Foreground="White"
+                                           FontSize="11"
+                                           FontWeight="SemiBold"/>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!-- ACTIONS -->
+                <DataGridTemplateColumn Header="ACTIONS" Width="2.0*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <Button Content="Détails" x:Name="btnDetails" Style="{StaticResource GhostButtonStyle}" Margin="0,0,6,0" Click="btnDetails_Click" />
+                                <Button Content="Modifier" x:Name="btnEdit" Style="{StaticResource DisableWhenCanceledButtonStyle}" Margin="0,0,6,0" Click="btnEdit_Click" />
+                                <Button Content="Clôturer" x:Name="btnCloturer" Style="{StaticResource DisableWhenCanceledButtonStyle}" Click="btnCloturer_Click" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Empty State Panel -->
+        <Border x:Name="EmptyStatePanel"
+                Grid.Row="4"
+                Style="{StaticResource CardStyle}" Visibility="Collapsed" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="30">
+                <iconPacks:PackIconMaterial Kind="CarKey" 
+                                            Width="32" Height="32" 
+                                            Foreground="{StaticResource PrimaryBrush}" 
+                                            VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,12"/>
+                <TextBlock Text="Aucune location trouvée" Style="{StaticResource HeaderTextStyle}" HorizontalAlignment="Center"/>
+                <TextBlock Text="Il n'y a aucune location enregistrée pour le moment. Créez-en une pour commencer."
+                           Style="{StaticResource SubHeaderTextStyle}" HorizontalAlignment="Center" Margin="0,4,0,16"/>
+                <Button Style="{StaticResource PrimaryButtonStyle}" Margin="0,10,0,0" Width="180" Click="BtnAddRental_Click">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <iconPacks:PackIconMaterial Kind="Plus"
+                                                    Foreground="White"
+                                                    Width="14" Height="14"
+                                                    VerticalAlignment="Center"
+                                                    Margin="0,0,8,0"/>
+                        <TextBlock Text="Nouvelle Location" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Border>
+
+    </Grid>
+</UserControl>

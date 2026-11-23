@@ -1,0 +1,86 @@
+﻿<UserControl x:Class="project_03.Car.Controls.CarSearchControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:local="clr-namespace:project_03.Car.Controls" MinWidth="600"
+             Background="{StaticResource DarkBgBrush}">
+
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Label & Search Bar Container -->
+            <RowDefinition Height="16"/>
+            <!-- Spacing -->
+            <RowDefinition Height="*"/>
+            <!-- Car Details Control Container -->
+        </Grid.RowDefinitions>
+
+        <!-- SEARCH CONTAINER -->
+        <StackPanel Grid.Row="0">
+            <!-- Label TextBlock -->
+            <TextBlock Text="Rechercher un véhicule par matricule" 
+                       Foreground="{StaticResource TextPrimaryBrush}" 
+                       FontSize="12" FontWeight="SemiBold" 
+                       Margin="0,0,0,6"/>
+
+            <!-- Search Input Bar -->
+            <Border Background="{StaticResource CardBgBrush}" 
+                    BorderBrush="{StaticResource BorderBrushSoft}" 
+                    BorderThickness="1" CornerRadius="8" Padding="12">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="12"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Plate Number TextBox -->
+                    <TextBox x:Name="txtSearchPlate" Grid.Column="0" Height="38"
+                         Background="{StaticResource DarkBgBrush}"
+                         Foreground="{StaticResource TextPrimaryBrush}"
+                         BorderBrush="{StaticResource BorderBrushSoft}"
+                         BorderThickness="1" VerticalContentAlignment="Center"
+                         Padding="10,0" TextChanged="txtSearchPlate_TextChanged">
+                        <TextBox.Template>
+                            <ControlTemplate TargetType="TextBox">
+                                <Border Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="6">
+                                    <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </TextBox.Template>
+                    </TextBox>
+
+
+                        <!-- Search Button with PackIconMaterial -->
+                    <Button Grid.Column="2" Width="120" Height="38" x:Name="Btn_Search"
+                            Background="{StaticResource PrimaryBrush}"
+                            Foreground="White" FontWeight="SemiBold" IsEnabled="False"
+                            Cursor="Hand" Click="Btn_Search_Click">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}" CornerRadius="6">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <iconPacks:PackIconMaterial Kind="Magnify" Width="16" Height="16" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                                        <TextBlock Text="Rechercher" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+            </Border>
+        </StackPanel>
+
+        <!-- CAR DETAILS USER CONTROL -->
+        <Border Grid.Row="2" Background="{StaticResource CardBgBrush}" 
+                BorderBrush="{StaticResource BorderBrushSoft}" 
+                BorderThickness="1" CornerRadius="8" Padding="16">
+            <!-- Embed your existing CarDetails UserControl here -->
+            <local:CarDetailsControl x:Name="carDetailsControl"/>
+        </Border>
+
+    </Grid>
+</UserControl>

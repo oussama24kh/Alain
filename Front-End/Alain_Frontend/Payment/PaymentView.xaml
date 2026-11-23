@@ -1,0 +1,263 @@
+﻿<UserControl x:Class="project_03.Payment.PaymentView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             Background="{StaticResource DarkBgBrush}" Loaded="UserControl_Loaded">
+
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Header -->
+            <RowDefinition Height="Auto"/>
+            <!-- KPI cards -->
+            <RowDefinition Height="Auto"/>
+            <!-- Filter bar -->
+            <RowDefinition Height="*"/>
+            <!-- DataGrid -->
+        </Grid.RowDefinitions>
+
+        <!-- ============ Header ============ -->
+        <Grid Grid.Row="0" Margin="0,0,0,12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="Paiements Complétés" Foreground="{StaticResource TextPrimaryBrush}"
+                           FontSize="28" FontWeight="Bold"/>
+                <TextBlock Text="Historique des transactions réglées et soldées"
+                           Style="{StaticResource SubHeaderTextStyle}" Margin="0,2,0,0"/>
+            </StackPanel>
+
+            <!--<StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBox x:Name="TxtQuickSearch" Width="240"
+                         Style="{StaticResource AppTextBoxStyle}"
+                         Tag="Rechercher un paiement réglé..."/>
+            </StackPanel>-->
+        </Grid>
+
+        <!-- ============ KPI cards ============ -->
+        <UniformGrid Grid.Row="1" Rows="1" Margin="0,0,0,12">
+            <!-- Card 1: Total Settled Revenue -->
+            <Border Style="{StaticResource CardStyle}" Margin="0,8,8,8">
+                <StackPanel>
+                    <TextBlock Text="Total Encaissé (Mois)" Style="{StaticResource SubHeaderTextStyle}"/>
+                    <TextBlock x:Name="TxtMonthRevenue" Text="N/A" FontSize="26" FontWeight="Bold"
+                               Foreground="{StaticResource GreenBrush}" Margin="0,4,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Card 2: Current Week Revenue -->
+            <Border Style="{StaticResource CardStyle}" Margin="8">
+                <StackPanel>
+                    <TextBlock Text="Semaine en Cours" Style="{StaticResource SubHeaderTextStyle}"/>
+                    <TextBlock x:Name="TxtCurrentWeekRevenue" Text="N/A" FontSize="26" FontWeight="Bold"
+                    Foreground="{StaticResource GreenBrush}" Margin="0,4,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Card 3: Collected Today -->
+            <Border Style="{StaticResource CardStyle}" Margin="8,8,0,8">
+                <StackPanel>
+                    <TextBlock Text="Encaissé Aujourd'hui" Style="{StaticResource SubHeaderTextStyle}"/>
+                    <TextBlock x:Name="TxtCollectedToday" Text="N/A" FontSize="26" FontWeight="Bold"
+                    Foreground="{StaticResource GreenBrush}" Margin="0,4,0,0"/>
+                </StackPanel>
+            </Border>
+            
+            
+            <!-- Card 4: Fully Paid Count -->
+            <Border Style="{StaticResource CardStyle}" Margin="8">
+                <StackPanel>
+                    <TextBlock Text="Contrats Soldés (Mois)" Style="{StaticResource SubHeaderTextStyle}"/>
+                    <TextBlock x:Name="TxtTotalPaidCount" Text="N/A" FontSize="26" FontWeight="Bold"
+                    Foreground="{StaticResource PrimaryBrush}" Margin="0,4,0,0"/>
+                </StackPanel>
+            </Border>
+        </UniformGrid>
+
+        <!-- ============ Filter bar ============ -->
+        <Border Grid.Row="2" Style="{StaticResource CardStyle}" x:Name="FilterGrid"
+                Padding="16,12" Margin="0,0,0,12">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="FILTRER PAR"
+                           Style="{StaticResource FilterLabelStyle}"/>
+                <ComboBox x:Name="CmbFilterField" Grid.Column="1" Style="{StaticResource FilterComboStyle}"
+                          Width="160" Margin="0,0,16,0" >
+                    <ComboBoxItem Content="Aucun Filter" IsSelected="True"/>
+                    <ComboBoxItem Content="Référence Contrat"/>
+                    <ComboBoxItem Content="Immatriculation"/>
+                    <ComboBoxItem Content="Numéro National"/>
+                    <ComboBoxItem Content="Période"/>
+                </ComboBox>
+
+                <TextBox x:Name="TxtFilterValue" Grid.Column="2" Width="240"
+                         Style="{StaticResource AppTextBoxStyle}" Visibility="Collapsed"
+                         Tag="Saisir la valeur..." />
+
+                <StackPanel Orientation="Horizontal" Grid.Column="2" x:Name="Period_StackPanel" Visibility="Collapsed">
+                    <ComboBox x:Name="CmbFilterYear" Style="{StaticResource FilterComboStyle}"
+                        Width="160" Margin="0,0,5,0" >
+
+                    </ComboBox>
+
+                    <ComboBox x:Name="CmbFilterMonth" Style="{StaticResource FilterComboStyle}"
+                        Width="160" Margin="0,0,16,0" >
+                        <ComboBoxItem Content="Tous les mois"/>
+                        <ComboBoxItem Content="Janvier"/>
+                        <ComboBoxItem Content="Février"/>
+                        <ComboBoxItem Content="Mars"/>
+                        <ComboBoxItem Content="Avril"/>
+                        <ComboBoxItem Content="Mai"/>
+                        <ComboBoxItem Content="Juin"/>
+                        <ComboBoxItem Content="Juillet"/>
+                        <ComboBoxItem Content="Août"/>
+                        <ComboBoxItem Content="Septembre"/>
+                        <ComboBoxItem Content="Octobre"/>
+                        <ComboBoxItem Content="Novembre"/>
+                        <ComboBoxItem Content="Décembre"/>
+                    </ComboBox>
+                </StackPanel>
+                
+
+                <!-- Clear -->
+                <StackPanel Grid.Column="4" Orientation="Horizontal" VerticalAlignment="Center" x:Name="RevenueTotal_Stack">
+                    <TextBlock Text="Total:" Style="{StaticResource SubHeaderTextStyle}"
+                    VerticalAlignment="Center" Margin="0,0,6,0"/>
+                    <TextBlock Text="N/A" Foreground="{StaticResource GreenBrush}"
+                    FontWeight="SemiBold" VerticalAlignment="Center" x:Name="txtblk_TotalRevenue"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- ============ DataGrid (Completed/Paid Only) ============ -->
+        <DataGrid x:Name="PaymentsGrid"
+                  Grid.Row="3"
+                  Style="{StaticResource AppDataGridStyle}"
+                  ColumnHeaderStyle="{StaticResource AppDataGridColumnHeaderStyle}"
+                  RowStyle="{StaticResource AppDataGridRowStyle}"
+                  CellStyle="{StaticResource AppDataGridCellStyle}">
+
+            <DataGrid.Columns>
+
+                <!-- CONTRAT -->
+                <DataGridTextColumn Header="CONTRAT" Binding="{Binding RentalCode}" Width="1.0*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+                            <Setter Property="FontWeight" Value="SemiBold"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="FontFamily" Value="Consolas"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <!-- CLIENT (Full Name + CIN) -->
+                <DataGridTemplateColumn Header="CLIENT" Width="1.8*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Text="{Binding CustomerName}"
+                                Foreground="{StaticResource TextPrimaryBrush}"
+                                FontWeight="SemiBold"/>
+                                <TextBlock Text="{Binding NationalNo}"
+                                Style="{StaticResource SubHeaderTextStyle}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!-- VEHICLE -->
+                <DataGridTemplateColumn Header="VÉHICULE" Width="1.8*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Text="{Binding CarFullName}"
+                                           Foreground="{StaticResource TextPrimaryBrush}"
+                                           FontWeight="SemiBold"/>
+                                <TextBlock Text="{Binding CarPlate}"
+                                           Style="{StaticResource SubHeaderTextStyle}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!-- DATE -->
+                <DataGridTextColumn Header="DATE DE PAIEMENT"
+                                    Binding="{Binding PaymentDate, StringFormat='{}{0:dd/MM/yyyy HH:mm}'}"
+                                    Width="1.3*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Foreground" Value="{StaticResource TextSecondaryBrush}"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <!-- AMOUNT -->
+                <DataGridTextColumn Header="MONTANT RÉGLÉ"
+                                    Binding="{Binding Amount, StringFormat='{}{0:N2} MAD'}"
+                                    Width="1.1*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Foreground" Value="{StaticResource GreenBrush}"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+
+                <!-- ACTIONS -->
+                <DataGridTemplateColumn Header="ACTIONS" Width="1.1*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <Button Content="Reçu" Style="{StaticResource GhostButtonStyle}" Click="BtnReceipt_Click"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Empty State Panel (Appears when no completed payments match) -->
+        <Border x:Name="PaymentEmptyStatePanel"
+        Grid.Row="3"
+        Style="{StaticResource CardStyle}" 
+        Visibility="Collapsed" 
+        VerticalAlignment="Center" 
+        HorizontalAlignment="Center" 
+        Margin="0,40,0,40"
+        Padding="40">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Border Width="48" Height="48" CornerRadius="24" Background="#1E293B" HorizontalAlignment="Center" Margin="0,0,0,14">
+                    <iconPacks:PackIconMaterial Kind="CashRemove" 
+                                        Width="24" Height="24" 
+                                        Foreground="{StaticResource PrimaryBrush}" 
+                                        VerticalAlignment="Center" 
+                                        HorizontalAlignment="Center"/>
+                </Border>
+                <TextBlock Text="Aucun paiement complété trouvé" 
+                   Style="{StaticResource HeaderTextStyle}" 
+                   FontSize="16"
+                   HorizontalAlignment="Center"/>
+                <TextBlock Text="Aucune transaction réglée ne correspond à vos critères de recherche ou à la période sélectionnée."
+                   Style="{StaticResource SubHeaderTextStyle}" 
+                   HorizontalAlignment="Center" 
+                   Margin="0,6,0,0" 
+                   TextAlignment="Center"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

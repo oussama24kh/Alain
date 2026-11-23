@@ -1,0 +1,171 @@
+﻿<Window x:Class="project_03.Car.AddEditCarWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        Title="Ajouter une nouvelle voiture" Height="480" Width="840"
+        WindowStartupLocation="CenterScreen" ShowInTaskbar="False"
+        ResizeMode="NoResize" Loaded="Window_Loaded"
+        Background="{StaticResource DarkBgBrush}">
+
+    <Border Style="{StaticResource CardStyle}" Margin="20" Padding="24">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <StackPanel Grid.Row="0" Margin="0,0,0,20">
+                <TextBlock x:Name="WindowTitle" Text="Ajouter une nouvelle voiture" Style="{StaticResource HeaderTextStyle}"/>
+                <TextBlock Text="Saisissez les caractéristiques techniques et les détails opérationnels du véhicule ci-dessous." Style="{StaticResource SubHeaderTextStyle}" Margin="0,4,0,0"/>
+            </StackPanel>
+
+            <!-- Form Content (Horizontal 2-Column Layout) -->
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="0,0,6,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="24"/>
+                        <!-- Spacer -->
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- LEFT COLUMN -->
+                    <StackPanel Grid.Column="0">
+                        <!-- License Plate -->
+                        <StackPanel Margin="0,0,0,14">
+                            <TextBlock Text="Plaque d'immatriculation" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12" Margin="0,0,0,6"/>
+                            <TextBox x:Name="txtBx_Plate" Style="{StaticResource AppTextBoxStyle}" Tag="e.g. 1-A-10548"/>
+                        </StackPanel>
+
+                        <!-- Brand -->
+                        <StackPanel Margin="0,0,0,14">
+                            <TextBlock Text="Marque" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12" Margin="0,0,0,6"/>
+                            <ComboBox x:Name="Cb_Brand" Style="{StaticResource FilterComboStyle}" Height="43" Width="NaN">
+                            </ComboBox>
+                        </StackPanel>
+
+                        <!-- Model -->
+                        <StackPanel Margin="0,0,0,14">
+                            <TextBlock Text="Modèle" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12" Margin="0,0,0,6"/>
+                            <TextBox x:Name="txtBx_Model" Style="{StaticResource AppTextBoxStyle}" Tag="e.g. Corolla"/>
+                        </StackPanel>
+
+                        <!-- Manufactured Year -->
+                        <StackPanel Margin="0,0,0,14">
+                            <TextBlock Text="Année de fabrication" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12" Margin="0,0,0,6"/>
+                            <TextBox x:Name="txtBx_Year" Style="{StaticResource AppTextBoxStyle}" Tag="e.g. 2024" PreviewTextInput="NumberTextBox_PreviewTextInput"
+                                    DataObject.Pasting="NumberTextBox_Pasting" PreviewKeyDown="NumberTextBox_PreviewKeyDown"/>
+                        </StackPanel>
+
+                        <!-- Fuel Type -->
+                        <StackPanel Margin="0,0,0,14">
+                            <TextBlock Text="Type de carburant" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12" Margin="0,0,0,6"/>
+                            <ComboBox x:Name="Cb_FuelType" Style="{StaticResource FilterComboStyle}" Width="NaN">
+                                <ComboBoxItem Content="Essence"/>
+                                <ComboBoxItem Content="Diesel" IsSelected="True"/>
+                                <ComboBoxItem Content="Hybride"/>
+                                <ComboBoxItem Content="Electrique"/>
+                                <ComboBoxItem Content="GPL"/>
+                            </ComboBox>
+                        </StackPanel>
+
+                        <!-- Transmission -->
+                        <StackPanel Margin="0,0,0,6">
+                            <TextBlock Text="Boîte de vitesses" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12" Margin="0,0,0,6"/>
+                            <ComboBox x:Name="Cb_Transmission" Style="{StaticResource FilterComboStyle}" Width="NaN">
+                                <ComboBoxItem Content="Automatique" IsSelected="True"/>
+                                <ComboBoxItem Content="Manuelle"/>
+                            </ComboBox>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- RIGHT COLUMN -->
+                    <StackPanel Grid.Column="2">
+                        <!-- Daily Rent Price -->
+                        <StackPanel Margin="0,0,0,14">
+                            <TextBlock Text="Prix de location journalier (MAD)" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12" Margin="0,0,0,6"/>
+                            <TextBox x:Name="txtBx_Price" Style="{StaticResource AppTextBoxStyle}" Tag="e.g. 400.00" PreviewTextInput="NumberTextBox_PreviewTextInput"
+                                    DataObject.Pasting="NumberTextBox_Pasting" PreviewKeyDown="NumberTextBox_PreviewKeyDown"/>
+                        </StackPanel>
+                        
+                        <!-- Number of Seats -->
+                        <StackPanel Margin="0,0,0,14">
+                            <TextBlock Text="Nombre de places" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12" Margin="0,0,0,6"/>
+                            <TextBox x:Name="txtBx_Seats" Style="{StaticResource AppTextBoxStyle}" Tag="e.g. 5" PreviewTextInput="NumberTextBox_PreviewTextInput"
+                                    DataObject.Pasting="NumberTextBox_Pasting" PreviewKeyDown="NumberTextBox_PreviewKeyDown"/>
+                        </StackPanel>
+
+                        <!-- Number of Doors -->
+                        <StackPanel Margin="0,0,0,14">
+                            <TextBlock Text="Nombre de portes" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12" Margin="0,0,0,6"/>
+                            <TextBox x:Name="txtBx_Doors" Style="{StaticResource AppTextBoxStyle}" Tag="e.g. 4" PreviewTextInput="NumberTextBox_PreviewTextInput"
+                                    DataObject.Pasting="NumberTextBox_Pasting" PreviewKeyDown="NumberTextBox_PreviewKeyDown"/>
+                        </StackPanel>
+
+                        <!-- Mileage -->
+                        <StackPanel Margin="0,0,0,14">
+                            <TextBlock Text="Kilométrage (km)" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12" Margin="0,0,0,6"/>
+                            <TextBox x:Name="txtBx_Mileage" Style="{StaticResource AppTextBoxStyle}" Tag="e.g. 15000" PreviewTextInput="NumberTextBox_PreviewTextInput"
+                                    DataObject.Pasting="NumberTextBox_Pasting" PreviewKeyDown="NumberTextBox_PreviewKeyDown"/>
+                        </StackPanel>
+
+                        <!-- Car Status -->
+                        <StackPanel Margin="0,0,0,14">
+                            <TextBlock Text="Statut du véhicule" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12" Margin="0,0,0,6"/>
+                            <ComboBox x:Name="Cbx_Status" Style="{StaticResource FilterComboStyle}" Width="NaN">
+                                <ComboBoxItem Content="DISPONIBLE" IsSelected="True"/>
+                                <ComboBoxItem Content="LOUE"/>
+                                <ComboBoxItem Content="RESERVE"/>
+                                <ComboBoxItem Content="EN MAINTENANCE"/>
+                                <ComboBoxItem Content="INDISPONIBLE"/>
+                                <ComboBoxItem Content="RETIRE"/>
+                            </ComboBox>
+                        </StackPanel>
+
+                        
+                        <!-- Body Type -->
+                        <StackPanel Margin="0,0,0,6">
+                            <TextBlock Text="Type de carrosserie" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12" Margin="0,0,0,6"/>
+                            <ComboBox x:Name="Cbx_BodyType" Style="{StaticResource FilterComboStyle}" Width="NaN">
+                                <ComboBoxItem Content="Hatchback"/>
+                                <ComboBoxItem Content="Sedan"/>
+                                <ComboBoxItem Content="Compact Sedan"/>
+                                <ComboBoxItem Content="SUV" IsSelected="True"/>
+                                <ComboBoxItem Content="Crossover"/>
+                                <ComboBoxItem Content="Station Wagon"/>
+                                <ComboBoxItem Content="Minivan"/>
+                                <ComboBoxItem Content="Coupe"/>
+                                <ComboBoxItem Content="Convertible"/>
+                                <ComboBoxItem Content="Pickup"/>
+                                <ComboBoxItem Content="Van"/>
+                                <ComboBoxItem Content="Minibus"/>
+                            </ComboBox>
+                        </StackPanel>
+
+                    </StackPanel>
+                </Grid>
+            </ScrollViewer>
+
+            <!-- Action Buttons -->
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+                <Button x:Name="btn_Close" Click="btn_Close_Click" Width="105" Height="36" Margin="0,0,12,0"
+                    Background="{StaticResource BorderBrushSoft}" Foreground="{StaticResource TextPrimaryBrush}" Style="{StaticResource PrimaryButtonStyle}">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <iconPacks:PackIconMaterial Kind="Close" Width="16" Height="16" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                        <TextBlock Text="Fermer" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="btn_Save" Click="btn_Save_Click" Width="170" Height="36" Style="{StaticResource PrimaryButtonStyle}">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <iconPacks:PackIconMaterial Kind="ContentSave" Width="16" Height="16" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                        <TextBlock Text="Enregistrer la voiture" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+
+        </Grid>
+    </Border>
+</Window>

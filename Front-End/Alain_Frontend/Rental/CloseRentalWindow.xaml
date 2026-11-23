@@ -1,0 +1,55 @@
+﻿<Window x:Class="project_03.Rental.CloseRentalWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        Title="Clôture du Contrat de Location" 
+        Width="480" Loaded="Window_Loaded"
+        SizeToContent="Height"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource DarkBgBrush}">
+
+    <Border Style="{StaticResource CardStyle}" Padding="24" Margin="12">
+        <StackPanel>
+            <!-- Header -->
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
+                <Border Width="38" Height="38" CornerRadius="8" Background="#1E293B" Margin="0,0,12,0">
+                    <iconPacks:PackIconMaterial Kind="ShieldCheck" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource PrimaryBrush}"/>
+                </Border>
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="Clôturer le Contrat" Style="{StaticResource HeaderTextStyle}" FontSize="15"/>
+                    <TextBlock x:Name="txtContractRefSub" Text="REF-2026-0001" Foreground="{StaticResource TextSecondaryBrush}" FontSize="11" FontFamily="Consolas"/>
+                </StackPanel>
+            </StackPanel>
+
+            <Separator Background="{StaticResource BorderBrushSoft}" Margin="0,0,0,16"/>
+
+            <!-- Actual End Date -->
+            <TextBlock Text="Date de Retour Effective" Foreground="{StaticResource TextSecondaryBrush}" FontSize="11" FontWeight="Bold" Margin="0,0,0,6"/>
+            <DatePicker x:Name="dpActualEndDate" Height="36" Margin="0,0,0,14" Foreground="{StaticResource TextSecondaryBrush}"
+                        Style="{StaticResource AppDatePickerStyle}" Focusable="False"/>
+
+            <!-- End Mileage -->
+            <TextBlock Text="Kilométrage de Retour" Foreground="{StaticResource TextSecondaryBrush}" FontSize="11" FontWeight="Bold" Margin="0,0,0,6"/>
+            <TextBox x:Name="txtEndMileage" Height="38" Style="{StaticResource AppTextBoxStyle}" Background="{StaticResource CardBgBrush}"
+                Foreground="{StaticResource TextSecondaryBrush}" BorderBrush="{StaticResource BorderBrushSoft}" BorderThickness="1" 
+                VerticalContentAlignment="Center" Padding="10,0" FontWeight="Bold" Text="" Margin="0,0,0,14"/>
+
+            <!-- Final Status or Adjustments (Optional Notes) -->
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Montant Total: " Foreground="{StaticResource TextSecondaryBrush}" FontSize="11" FontWeight="Bold" Margin="0,0,0,6"/>
+                <TextBlock x:Name="txtTotal" Text="-" Foreground="{StaticResource GreenBrush}" FontSize="12" FontWeight="Bold" Margin="0,0,0,6"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" x:Name="AvancementPanel" Visibility="Collapsed">
+                <TextBlock Text="Montant de l'avance: " Foreground="{StaticResource TextSecondaryBrush}" FontSize="11" FontWeight="Bold" Margin="0,0,0,6"/>
+                <TextBlock x:Name="txtAvancment" Text="-" Foreground="{StaticResource GreenBrush}" FontSize="12" FontWeight="Bold" Margin="0,0,0,6"/>
+            </StackPanel>
+            <!-- Action Buttons -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Annuler" Width="90" Height="34" Margin="0,0,10,0" Style="{StaticResource GhostButtonStyle}" Click="BtnCancel_Click"/>
+                <Button Content="Confirmer la Clôture" Width="140" Height="34" Style="{StaticResource PrimaryButtonStyle}" Click="BtnConfirm_Click"/>
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</Window>
