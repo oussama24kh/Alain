@@ -1,0 +1,15 @@
+# Visual Studio
+.vs/
+**/.vs/
+
+# Build output
+bin/
+obj/
+
+# Visual Studio user files
+*.user
+*.suo
+*.vsidx
+
+# Other generated files
+TestResults/

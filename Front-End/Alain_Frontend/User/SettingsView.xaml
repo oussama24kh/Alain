@@ -82,25 +82,6 @@
                 </StackPanel>
             </Border>
 
-            <!-- Card 4: Settlement Rate -->
-            <Border Style="{StaticResource CardStyle}" Margin="8">
-                <StackPanel>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="TAUX DE RÈGLEMENT" Style="{StaticResource SubHeaderTextStyle}"/>
-                        <iconPacks:PackIconMaterial Grid.Column="1" Kind="CheckCircleOutline" Width="18" Height="18" 
-                                                    Foreground="{StaticResource GreenBrush}" VerticalAlignment="Center"/>
-                    </Grid>
-                    <TextBlock Text="94.2%" FontSize="26" FontWeight="Bold"
-                               Foreground="{StaticResource TextPrimaryBrush}" Margin="0,6,0,0"/>
-                    <TextBlock Text="Factures soldées à temps"
-                               Style="{StaticResource SubHeaderTextStyle}" Margin="0,2,0,0"/>
-                </StackPanel>
-            </Border>
-
         </UniformGrid>
 
         <!-- ============ Body: 2* main / 1* side ============ -->

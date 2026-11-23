@@ -233,3 +233,4 @@ C:\Users\DELL\Desktop\Alain-main\Front-End\Alain_Frontend\bin\Debug\net8.0-windo
 C:\Users\DELL\Desktop\Alain-main\Front-End\Alain_Frontend\bin\Debug\net8.0-windows\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\DELL\Desktop\Alain-main\Front-End\Alain_Frontend\obj\Debug\net8.0-windows\User\EditCompanyWindow.baml
 C:\Users\DELL\Desktop\Alain-main\Front-End\Alain_Frontend\obj\Debug\net8.0-windows\User\EditCompanyWindow.g.cs
+C:\Users\DELL\Desktop\Alain-main\Front-End\Alain_Frontend\obj\Debug\net8.0-windows\Alain_Frontend.sourcelink.json

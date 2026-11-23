@@ -331,3 +331,4 @@ C:\Users\DELL\Desktop\Alain-main\Back-End\ALAIN-PresentationLayer\obj\Debug\net8
 C:\Users\DELL\Desktop\Alain-main\Back-End\ALAIN-PresentationLayer\obj\Debug\net8.0\ref\ALAIN-API.dll
 C:\Users\DELL\Desktop\Alain-main\Back-End\ALAIN-PresentationLayer\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\DELL\Desktop\Alain-main\Back-End\ALAIN-PresentationLayer\obj\Debug\net8.0\ALAIN-API.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\DELL\Desktop\Alain-main\Back-End\ALAIN-PresentationLayer\obj\Debug\net8.0\ALAIN-API.sourcelink.json
